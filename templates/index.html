@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Bootstrap CSS -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"
+        />
+        <style>
+            .header{
+                background: rgb(235, 91, 91);
+                height: 100px;
+            }
+            .header_text{
+                color :white;
+                font-size: xx-large;
+                text-align: center;
+                padding-top:20px;
+                text-shadow: 2px 2px  #000000;
+                align-items: center;
+            }
+            .sub_header_text{
+                color :rgb(0, 0, 0);
+                font-weight:normal;
+                font-size: x-large;
+                text-align: center;
+                padding-top:20px;
+                align-items: center;
+            }
+            .add_margin{
+                margin-right: 100px;
+                margin-left: 100px;
+            }
+            .check_border{
+                border: 2px solid red;
+            }
+            .body_div{
+                background: rgb(255, 255, 255);
+                height: 800px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                align-content: center;
+                border-radius: 10px;
+            }
+            .scroll_view_vertical{
+                background: rgb(255, 255, 255);
+                height: 100px;
+                width:500px;
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                align-self:space-evenly	;
+                margin:20px;
+            }
+            .scroll_element_vertical{
+                background: #d8e9f0;
+                /* display: flex; */
+                height: 50px;
+                width:480px;
+                border: 1px solid #3584a5;
+                border-radius: 50px;
+                padding-left: 20px;
+                margin: 2px;
+            }
+            .scroll_element_vertical:hover{
+                background: #4ac5f9;
+            }
+            .scroll_element_vertical:active{
+                background: #4af987;
+            }
+            .text_user{
+                color :white;
+                text-align: center;
+                font-size: medium;
+            }
+            .recommend{
+                background: rgb(0, 179, 255);
+                height: 50px;
+                width:200px;
+                border: 1px solid #3584a5;
+                border-radius: 50px;
+            }
+            .recommend:hover{
+                background: #215f7a;
+            }
+            .recommend:active{
+                background: rgb(255, 255, 255);
+                color :rgb(0, 0, 0);
+                border: 2px solid #000000;
+            }
+            .recommend_text{
+                color :white;
+                font-size: 30px;
+                text-align: center;
+                align-items: center;
+                vertical-align: middle;
+            }
+            .recommend_disp{
+                background-color: #40daf5;
+                padding-left: 50px;
+                margin-top: 50px;
+                font-size: 25px;
+                width: 90%;
+                border-radius: 10px;
+            }
+            .scroll_view_horizontal{
+                padding: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                background: #fe5858;
+                height: 450px;
+                width: 90%;
+                border-radius: 10px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                box-shadow: inset 0 0 10px #000000d5;
+            }
+            .scroll_element{
+                background: #7d236d;
+                height: 350px;
+                width:300px;
+                border-radius: 10px;
+                padding: 10px;
+                margin:10px;
+            }
+            .text{
+                color :rgb(33, 107, 234);
+                text-align: center;
+            }
+            .product_text{
+                margin:10px; 
+                height : 150px; 
+                font-size: 20px; 
+                color: #f6d6f0;
+            }
+            .score_text{
+                margin-top:2px; 
+                font-size: 15px; 
+                color:  #e67ed3;
+            }
+            .score_value_text{
+                margin-top: 5px;
+                font-size:70px ; 
+                color: rgb(255, 255, 255);
+                font-weight: bold;
+            }
+        </style>
+        <title>Sentiment Based Product Recommendation</title>
+    </head>
+    <body >
+        <div class="header "> 
+            <h1 class="header_text"> Sentiment Based Product Recommendation System </h1>
+        </div>
+        <div class="header " style = 'background: #40daf5; height: 70px;'> 
+            <h1 class="sub_header_text"> Type user name for product recommendation </h1>
+        </div>
+        <div class = 'add_margin'>
+            <div class=" body_div"> 
+                <form style="margin-top : 10px" action="/predict" method="post"> 
+                    <input class="scroll_element_vertical" type="text"
+                    id="userName"
+                    name="userName"
+                    placeholder="Enter UserName to search..."></input>
+                    <input type='submit' class = 'recommend recommend_text'  value='submit' />
+                </form>
+                <div class = 'recommend_disp'>Recommended Products for <b>{{user_name}}</b></div>
+                <div class = 'scroll_view_horizontal' >
+                    {% for i in range(5)%}
+                    <div class = 'scroll_element' >
+                        <h1 class = 'text score_text' > Product</h1>
+                        <h2 class = 'text product_text' > {{contents[i]}}</h2>
+                        <h1 class = 'text score_text' > Score</h1>
+                        <h1 class = 'text score_value_text'> {{counts[i]}} </h1>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+    </footer>
+</html>
